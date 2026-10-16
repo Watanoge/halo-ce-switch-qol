@@ -202,14 +202,15 @@ not the phone's gyroscope, which turns as the phone does, and makes them the
 stick's rate before the magnetism. On the Switch the controller's gyroscope
 takes that place, for every local pad. Whether the gyroscope aims (on Android
 the phone's, on the Switch the controller's) is a profile's Gyro Aim
-(input.gyro_aim: always, or only while zoomed), and its horizontal and
+(input.gyro_aim, and input.gyro_zoom_only: always, or only while zoomed), and its horizontal and
 vertical sensitivity and invert are their own (input.gyro_sensitivity_horizontal,
 input.gyro_sensitivity_vertical, input.gyro_invert_horizontal,
 input.gyro_invert_vertical); the web's overlay has its own. Nothing but on
 Android, the web and the Switch. */
 #ifdef HALO_ANDROID
 /* input.gyro_aim and the rest, read again when the settings change: "true"
-aims with the gyroscope, "zoom" only while zoomed (halo_linux_gyro_zoom_only) */
+aims with the gyroscope, and input.gyro_zoom_only (or an older "zoom") only
+while zoomed (halo_linux_gyro_zoom_only) */
 static struct
 {
 	int enabled;
@@ -229,8 +230,10 @@ static void gyro_settings_read(void)
 		return;
 	gyro.read_at = config_changes();
 	aim = config_string("input.gyro_aim");
-	gyro.zoom_only = !strcmp(aim, "zoom");
-	gyro.enabled = gyro.zoom_only || !strcmp(aim, "true");
+	/* ("zoom" is the older value of input.gyro_aim: aim on. The first time
+	the file has it and not input.gyro_zoom_only, that setting is turned on) */
+	gyro.enabled = !strcmp(aim, "true") || !strcmp(aim, "zoom");
+	gyro.zoom_only = gyro.enabled && config_boolean("input.gyro_zoom_only");
 	gyro.invert_horizontal = config_boolean("input.gyro_invert_horizontal");
 	gyro.invert_vertical = config_boolean("input.gyro_invert_vertical");
 	gyro.sensitivity_horizontal = (float)config_real("input.gyro_sensitivity_horizontal");

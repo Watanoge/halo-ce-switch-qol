@@ -14,10 +14,11 @@
 	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/options_menu" type="column_list" width="640" height="480" flags="pass_unhandled_to_focused_child up_down_tabs_children" description="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/help">
 		<data input="port settings help"/>
 		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/op_gyro_aim" x="54" y="73"/>
-		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/op_gyro_sensitivity_horizontal" x="54" y="103"/>
-		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/op_gyro_sensitivity_vertical" x="54" y="133"/>
-		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/op_gyro_invert_horizontal" x="54" y="163"/>
-		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/op_gyro_invert_vertical" x="54" y="193"/>
+		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/op_gyro_zoom_only" x="54" y="103"/>
+		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/op_gyro_sensitivity_horizontal" x="54" y="133"/>
+		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/op_gyro_sensitivity_vertical" x="54" y="163"/>
+		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/op_gyro_invert_horizontal" x="54" y="193"/>
+		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/op_gyro_invert_vertical" x="54" y="223"/>
 		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/button_bar" y="414"/>
 	</widget>
 	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/button_bar" type="column_list" width="640" height="28" flags="pass_unhandled_to_focused_child left_right_tabs_items">
@@ -31,7 +32,17 @@
 	</widget>
 	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_aim_label" type="text" controller="1" width="300" height="22" string_list="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/labels" string_index="0" font="ui\large_ui" color="#FF2896FF" text_x="13" text_y="4">
 	</widget>
-	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_aim_spinner" type="spinner" left="3" top="2" width="147" height="20" flags="pass_unhandled_to_focused_child left_right_tabs_items" strings="ON|OFF|ONLY ON ZOOM" setting="input.gyro_aim" values="true|false|zoom" font="ui\large_ui" color="#FF2896FF" align="center" text_y="1" header_bitmap="bitmaps/arrow_sm_left" footer_bitmap="bitmaps/arrow_sm_right" header_bounds="7 -6 19 0" footer_bounds="7 150 19 156">
+	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_aim_spinner" type="spinner" left="3" top="2" width="147" height="20" flags="pass_unhandled_to_focused_child left_right_tabs_items" strings="ON|OFF" setting="input.gyro_aim" values="true|false" font="ui\large_ui" color="#FF2896FF" align="center" text_y="1" header_bitmap="bitmaps/arrow_sm_left" footer_bitmap="bitmaps/arrow_sm_right" header_bounds="7 -6 19 0" footer_bounds="7 150 19 156">
+		<on event="created" run="port setting load"/>
+		<on event="deleted" run="port setting save"/>
+	</widget>
+	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/op_gyro_zoom_only" width="512" height="28" flags="pass_unhandled_to_focused_child" bitmap="bitmaps/option_bkds" color="#FF2896FF">
+		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_zoom_only_label"/>
+		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_zoom_only_spinner" x="320" y="1"/>
+	</widget>
+	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_zoom_only_label" type="text" controller="1" width="300" height="22" string_list="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/labels" string_index="1" font="ui\large_ui" color="#FF2896FF" text_x="13" text_y="4">
+	</widget>
+	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_zoom_only_spinner" type="spinner" left="3" top="2" width="147" height="20" flags="pass_unhandled_to_focused_child left_right_tabs_items" strings="YES|NO" setting="input.gyro_zoom_only" values="true|false" font="ui\large_ui" color="#FF2896FF" align="center" text_y="1" header_bitmap="bitmaps/arrow_sm_left" footer_bitmap="bitmaps/arrow_sm_right" header_bounds="7 -6 19 0" footer_bounds="7 150 19 156">
 		<on event="created" run="port setting load"/>
 		<on event="deleted" run="port setting save"/>
 	</widget>
@@ -39,7 +50,7 @@
 		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_sensitivity_horizontal_label"/>
 		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_sensitivity_horizontal_spinner" x="320" y="1"/>
 	</widget>
-	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_sensitivity_horizontal_label" type="text" controller="1" width="300" height="22" string_list="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/labels" string_index="1" font="ui\large_ui" color="#FF2896FF" text_x="13" text_y="4">
+	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_sensitivity_horizontal_label" type="text" controller="1" width="300" height="22" string_list="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/labels" string_index="2" font="ui\large_ui" color="#FF2896FF" text_x="13" text_y="4">
 	</widget>
 	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_sensitivity_horizontal_spinner" type="spinner" left="3" top="2" width="147" height="20" flags="pass_unhandled_to_focused_child left_right_tabs_items" strings="0.25|0.5|0.75|1|1.25|1.5|2|2.5|3|4|5|6|7|8|9|10" setting="input.gyro_sensitivity_horizontal" values="0.25|0.5|0.75|1|1.25|1.5|2|2.5|3|4|5|6|7|8|9|10" font="ui\large_ui" color="#FF2896FF" align="center" text_y="1" header_bitmap="bitmaps/arrow_sm_left" footer_bitmap="bitmaps/arrow_sm_right" header_bounds="7 -6 19 0" footer_bounds="7 150 19 156">
 		<on event="created" run="port setting load"/>
@@ -49,7 +60,7 @@
 		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_sensitivity_vertical_label"/>
 		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_sensitivity_vertical_spinner" x="320" y="1"/>
 	</widget>
-	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_sensitivity_vertical_label" type="text" controller="1" width="300" height="22" string_list="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/labels" string_index="2" font="ui\large_ui" color="#FF2896FF" text_x="13" text_y="4">
+	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_sensitivity_vertical_label" type="text" controller="1" width="300" height="22" string_list="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/labels" string_index="3" font="ui\large_ui" color="#FF2896FF" text_x="13" text_y="4">
 	</widget>
 	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_sensitivity_vertical_spinner" type="spinner" left="3" top="2" width="147" height="20" flags="pass_unhandled_to_focused_child left_right_tabs_items" strings="0.25|0.5|0.75|1|1.25|1.5|2|2.5|3|4|5|6|7|8|9|10" setting="input.gyro_sensitivity_vertical" values="0.25|0.5|0.75|1|1.25|1.5|2|2.5|3|4|5|6|7|8|9|10" font="ui\large_ui" color="#FF2896FF" align="center" text_y="1" header_bitmap="bitmaps/arrow_sm_left" footer_bitmap="bitmaps/arrow_sm_right" header_bounds="7 -6 19 0" footer_bounds="7 150 19 156">
 		<on event="created" run="port setting load"/>
@@ -59,7 +70,7 @@
 		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_invert_horizontal_label"/>
 		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_invert_horizontal_spinner" x="320" y="1"/>
 	</widget>
-	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_invert_horizontal_label" type="text" controller="1" width="300" height="22" string_list="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/labels" string_index="3" font="ui\large_ui" color="#FF2896FF" text_x="13" text_y="4">
+	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_invert_horizontal_label" type="text" controller="1" width="300" height="22" string_list="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/labels" string_index="4" font="ui\large_ui" color="#FF2896FF" text_x="13" text_y="4">
 	</widget>
 	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_invert_horizontal_spinner" type="spinner" left="3" top="2" width="147" height="20" flags="pass_unhandled_to_focused_child left_right_tabs_items" strings="YES|NO" setting="input.gyro_invert_horizontal" values="true|false" font="ui\large_ui" color="#FF2896FF" align="center" text_y="1" header_bitmap="bitmaps/arrow_sm_left" footer_bitmap="bitmaps/arrow_sm_right" header_bounds="7 -6 19 0" footer_bounds="7 150 19 156">
 		<on event="created" run="port setting load"/>
@@ -69,7 +80,7 @@
 		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_invert_vertical_label"/>
 		<child widget="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_invert_vertical_spinner" x="320" y="1"/>
 	</widget>
-	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_invert_vertical_label" type="text" controller="1" width="300" height="22" string_list="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/labels" string_index="4" font="ui\large_ui" color="#FF2896FF" text_x="13" text_y="4">
+	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_invert_vertical_label" type="text" controller="1" width="300" height="22" string_list="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/labels" string_index="5" font="ui\large_ui" color="#FF2896FF" text_x="13" text_y="4">
 	</widget>
 	<widget name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/gyro_invert_vertical_spinner" type="spinner" left="3" top="2" width="147" height="20" flags="pass_unhandled_to_focused_child left_right_tabs_items" strings="YES|NO" setting="input.gyro_invert_vertical" values="true|false" font="ui\large_ui" color="#FF2896FF" align="center" text_y="1" header_bitmap="bitmaps/arrow_sm_left" footer_bitmap="bitmaps/arrow_sm_right" header_bounds="7 -6 19 0" footer_bounds="7 150 19 156">
 		<on event="created" run="port setting load"/>
@@ -87,6 +98,7 @@
 	</widget>
 	<strings name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/labels">
 		<string text="GYRO AIM:"/>
+		<string text="ONLY ON ZOOM:"/>
 		<string text="HORIZONTAL SENSITIVITY:"/>
 		<string text="VERTICAL SENSITIVITY:"/>
 		<string text="INVERT HORIZONTAL:"/>
@@ -94,7 +106,8 @@
 	</strings>
 	<strings name="main_menu/settings_select/player_setup/player_profile_edit/gamepad_setup/gyro/help_strings">
 		<string text=""/>
-		<string text="Turn the view with the gyroscope,\nalways, or only while zoomed in."/>
+		<string text="Turn the view with the gyroscope."/>
+		<string text="The gyroscope turns the view only while\nzoomed in."/>
 		<string text="How far the view turns left and right.\n1 is the sensor's own turn."/>
 		<string text="How far the view turns up and down.\n1 is the sensor's own turn."/>
 		<string text="Turning it right looks left."/>
